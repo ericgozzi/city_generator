@@ -1,0 +1,11 @@
+body{
+    background-color: black;
+}
+
+
+iframe{
+    margin-left: 15vw;
+    width: 70vw;
+    height: 100vh;
+    border: none;
+}
