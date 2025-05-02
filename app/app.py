@@ -62,7 +62,7 @@ def build_the_city(library: str, questions: list[str]):
 
 library = st.selectbox(
     "Library",
-    ("urbotheka", "hitchhikers_guide"),
+    ("urbotheka", "hitchhikers_guide", "cookbooks"),
 )
 
 questions = st.text_input("Concepts", 'house museum apple')
