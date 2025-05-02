@@ -19,7 +19,16 @@ def get_connections_of_a_question(theka, question):
     quotebook = Quotebook(answers)
     text, footnotes, title = quotebook.build_text(create_title=True, n=deepness)
 
-    narrative = filter_by_places(text)
+    
+    filter_list = PLACES + additional_concepts
+
+    # Fileter by places
+    words = re.findall(r'\b\w+(?:-\w+)?\b', text.lower())  # Extract words, including hyphenated
+    filtered = [word for word in words if word in filter_list]
+    narrative = " ".join(filtered)
+
+
+    
     narrative = clean_whitespaces(narrative)
     connections = get_connection_of_word(narrative)
 
@@ -43,13 +52,18 @@ def build_the_city(library: str, questions: list[str]):
     bck_colors = {
         'urbotheka': Color.BLACK,
         'hitchhikers_guide': Color.BLUE,
-        'cookbooks': Color.OLIVE
+        'cookbooks': Color.OLIVE,
+        'posthuman': Color.WHITE
 
     }
 
+    wrt_color = {
+        'posthuman': Color.BLACK
+    }
+
     city = g.draw(show_nodes=False, 
-                  label_color=Color.WHITE, 
-                  edge_color=Color.WHITE,
+                  label_color=wrt_color.get(library, Color.WHITE), 
+                  edge_color=wrt_color.get(library, Color.WHITE),
                   background_color = bck_colors.get(library, Color.BLACK),
                   label_size=30, 
                   edge_direction=False, 
@@ -65,7 +79,7 @@ def build_the_city(library: str, questions: list[str]):
 
 library = st.selectbox(
     "Library",
-    ("urbotheka", "hitchhikers_guide", "cookbooks")
+    ("urbotheka", "posthuman", "hitchhikers_guide", "cookbooks")
 )
 
 questions = st.text_input("Concepts", 'house museum apple')
@@ -79,6 +93,11 @@ settings_col, generate_col, download_col = st.columns(3)
 # ADVANCED SETTINGS
 with settings_col.popover('Advanced Settings', use_container_width=True):
     deepness = st.slider('Deepness', 1, 100, 30, 1)
+
+    additional_concepts = st.text_input('Additional concepts to show in the city')
+    additional_concepts = additional_concepts.lower()
+    additional_concepts = additional_concepts.split(' ')
+
     resume = st.checkbox('Show resume')
 
 
@@ -91,7 +110,7 @@ if generate_col.button('Generate City', use_container_width=True, type="primary"
             image = build_the_city(library, questions)
         st.image(image.np_array)
         if resume:
-            st.text(f'Library: {library} \nConcepts: {', '.join(questions)} \nDeepness: {deepness}')
+            st.text(f'Library: {library} \nConcepts: {', '.join(questions)} \nAdditional Concepts: {', '.join(additional_concepts)} \nDeepness: {deepness}')
     
 
         # Save to BytesIO buffer
