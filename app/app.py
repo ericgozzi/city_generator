@@ -4,6 +4,8 @@ from literate import *
 from pixels import Color
 from metrika import Graph
 
+import io
+
 
 def get_connections_of_a_question(theka, question):
 
@@ -71,17 +73,17 @@ questions = st.text_input("Concepts", 'house museum apple')
 
 
 # BUTTONS LAYOUT
-settings_col, generate_col = st.columns(2)
+settings_col, generate_col, download_col = st.columns(3)
 
 
 # ADVANCED SETTINGS
-with settings_col.popover('Advanced Settings', use_container_width=True, icon="⚙️"):
+with settings_col.popover('Advanced Settings', use_container_width=True):
     deepness = st.slider('Deepness', 1, 100, 30, 1)
     resume = st.checkbox('Show resume')
 
 
 # GENERATE BUTTON
-if generate_col.button('Generate City', use_container_width=True, icon="🌆", type="primary"):
+if generate_col.button('Generate City', use_container_width=True, type="primary"):
     questions = questions.lower()
     questions = questions.split(' ')
     try:
@@ -90,5 +92,16 @@ if generate_col.button('Generate City', use_container_width=True, icon="🌆", t
         st.image(image.np_array)
         if resume:
             st.text(f'Library: {library} \nConcepts: {', '.join(questions)} \nDeepness: {deepness}')
+    
+
+        # Save to BytesIO buffer
+        buffer = io.BytesIO()
+        image.image.save(buffer, format="PNG")
+        buffer.seek(0)
+
+        download_col.download_button('Download Image', buffer, file_name=f'{library.upper()}_{'-'.join(questions)}.png', mime="image/png", use_container_width=True)
+            
+    
     except:
         st.error('This is embarassing... try to change the concepts.', icon="😳")
+
