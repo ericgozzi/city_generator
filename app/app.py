@@ -60,11 +60,6 @@ def build_the_city(library: str, questions: list[str]):
 
 
 
-
-
-st.title('ASK HAL')
-
-
 library = st.selectbox(
     "From which library of books would you like to generate a city?",
     ("urbotheka", "hitchhikers_guide"),
