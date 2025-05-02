@@ -1,11 +1,39 @@
+@font-face {
+    font-family: 'Inter';
+    src: url(InterVariable.ttf);
+}
+
+
 body{
     background-color: white;
 }
 
 
+h1{
+    font-family: 'Inter';
+    font-size: 50px;
+    margin-left: 15vw;
+}
+
+h2{
+    font-family: 'Inter';
+    font-size: 30px;
+    margin-left: 15vw;
+}
+
+p{
+    font-family: 'Inter';
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+
+
 iframe{
     margin-left: 15vw;
     width: 70vw;
-    height: 100vh;
+    height: 1100px;
     border: none;
 }
+
+

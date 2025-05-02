@@ -61,11 +61,11 @@ def build_the_city(library: str, questions: list[str]):
 
 
 library = st.selectbox(
-    "From which library of books would you like to generate a city?",
+    "Library",
     ("urbotheka", "hitchhikers_guide"),
 )
 
-questions = st.text_input("Generate a city around: ")
+questions = st.text_input("Concepts")
 
 
 questions = questions.lower()
