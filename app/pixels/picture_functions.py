@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
 import math
+import os
 
 from .picture import Picture
 
@@ -175,10 +176,10 @@ def get_blank_picture(width: int, height: int, color: Color, border_thickness=0,
     Returns:
         Picture: A Picture object containing the generated image.
     """
-    image = Image.new("RGB", (width, height), color.color)
+    image = Image.new("RGB", (width, height), color.rgb)
 
     draw = ImageDraw.Draw(image)
-    draw.rectangle([0, 0, width - 1, height - 1], outline=border_color.color, width=border_thickness)
+    draw.rectangle([0, 0, width - 1, height - 1], outline=border_color.rgb, width=border_thickness)
 
     picture = Picture.from_PIL_image(image)
     return picture
@@ -253,7 +254,7 @@ def add_centered_text(picture: Picture, text: str, **kwargs) -> Picture:
     for line in lines:
         line_width = draw.textbbox((0, 0), line, font=font)[2]  # Calculate the width of the current line
         x_start = (picture.width - line_width) // 2  # Center the line horizontally
-        draw.text((x_start, y), line, fill=text_color.color, font=font)
+        draw.text((x_start, y), line, fill=text_color.rgb, font=font)
         y += draw.textbbox((0, 0), line, font=font)[3]  # Move to the next line's position
 
     return picture
