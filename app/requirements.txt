@@ -1,0 +1,13 @@
+numpy
+Pillow
+networkx
+nltk
+opencv-python
+reportlab
+ipywidgets
+matplotlib
+requests
+BeautifulSoup4
+sympy
+scipy
+fonttools
