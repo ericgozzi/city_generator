@@ -74,6 +74,10 @@ questions = questions.split(' ')
 
 
 if st.button("Generate"):
-    image = build_the_city(library, questions)
-    st.image(image.np_array)
-
+    try:
+        with st.spinner("HAL is reading the books...", show_time=True):
+            image = build_the_city(library, questions)
+        st.image(image.np_array)
+        st.text(f'Library: {library} \nTopics: {', '.join(questions)}')
+    except:
+        st.error('This is embarassing... try to change the concepts.', icon="😳")
