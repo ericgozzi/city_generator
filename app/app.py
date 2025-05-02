@@ -40,7 +40,8 @@ def build_the_city(library: str, questions: list[str]):
 
     bck_colors = {
         'urbotheka': Color.BLACK,
-        'hitchhikers_guide': Color.BLUE
+        'hitchhikers_guide': Color.BLUE,
+        'cookbooks': Color.GREEN
 
     }
 
