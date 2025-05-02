@@ -6,7 +6,6 @@ import os
 from pixels import Color
 from pixels import Picture
 
-from .math import Equation
 
 class Plotter:
     
