@@ -27,6 +27,12 @@ p{
     margin-right: 15vw;
 }
 
+.copyright{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 30px;
+    color: gray
+}
 
 
 iframe{

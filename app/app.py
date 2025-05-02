@@ -65,7 +65,7 @@ library = st.selectbox(
     ("urbotheka", "hitchhikers_guide"),
 )
 
-questions = st.text_input("Concepts")
+questions = st.text_input("Concepts", 'house museum apple')
 
 
 questions = questions.lower()
