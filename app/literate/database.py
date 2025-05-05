@@ -53,5 +53,5 @@ PLACES = [
     
     # Miscellaneous
     'market', 'flea market', 'flea', 'vendor', 'car wash', 'laundromat', 'barber', 
-    'tattoo', 'event hall', 'casino', 'whorehouse', 'castle', 'villa', 'tower', 'worksite', 'atelier', 'farm', 'mountain', 'hill', 
+    'tattoo', 'event hall', 'casino', 'whorehouse', 'castle', 'villa', 'tower', 'worksite', 'atelier', 'farm', 'mountain', 'hill', 'plain', 'valley'
 ]
