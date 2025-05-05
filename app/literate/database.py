@@ -42,7 +42,7 @@ PLACES = [
     'hospital', 'clinic', 'doctor', 'pharmacy', 'vet clinic', 'veterinarian'
     
     # Financial Institutions
-    'bank', 'atm', 'credit union', 'credit', 'investment firm', 'mortgage', 'insurance office', 'insurance' 
+    'bank', 'atm', 'credit union', 'investment firm', 'insurance office', 
     
     # Public Services
     'post office', 'post', 'recycling', 'garbage dump', 'dump', 'garbage', 'sewage', 'treatment', 'plant', 'sewage treatment plant', 
@@ -52,6 +52,6 @@ PLACES = [
     'factory', 'warehouse', 'port', 'depot', 'power plant', 
     
     # Miscellaneous
-    'market', 'flea market', 'flea', 'vendor', 'car wash', 'wash', 'laundromat', 'barber shop', 
-    'tattoo', 'event hall', 'casino', 'whorehouse', 'castle', 'villa', 'tower', 'worksite', 'atelier'
+    'market', 'flea market', 'flea', 'vendor', 'car wash', 'laundromat', 'barber', 
+    'tattoo', 'event hall', 'casino', 'whorehouse', 'castle', 'villa', 'tower', 'worksite', 'atelier', 'farm', 'mountain', 'hill', 
 ]
