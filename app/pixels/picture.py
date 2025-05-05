@@ -1061,6 +1061,7 @@ class Picture:
             None
         """
         color = kwargs.get('color', Color.BLACK)
+        align = kwargs.get('align', 'center')
 
         draw = ImageDraw.Draw(self.image)
         font_path = os.path.join(os.path.dirname(__file__), '..', 'fonts', 'font_test.ttf')
@@ -1072,9 +1073,16 @@ class Picture:
         text_height = bbox[3] - bbox[1]
 
         # Adjust position if centering
-        x, y = position
-        x -= text_width // 2
-        y -= text_height // 2
+        if align == 'center':
+            x, y = position
+            x -= text_width // 2
+            y -= text_height // 2
+        elif align == 'left':
+            x, y = position
+        elif align == 'right':
+            x, y = position
+            x -= text_width
+            y -= text_height
 
         draw.text((x, y), text, fill=color.rgb, font=font)
 

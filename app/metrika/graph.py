@@ -69,6 +69,12 @@ class Graph:
         background_color: Color = kwargs.get('background_color', Color.BLACK)
         invert_colors: bool = kwargs.get('invert_colors', False)
 
+        show_eigenvector: bool = kwargs.get('show_eigenvector', False)
+
+        show_cartouche: bool = kwargs.get('show_cartouche', False)
+        cartouche: str = kwargs.get('cartouche', 'Provide cartouche *kwarg')
+
+
 
         scale_factor = pic_size/2-pic_size/20
         pic = get_blank_picture(pic_size, pic_size, background_color)
@@ -116,8 +122,17 @@ class Graph:
             center_y: int = pos[key][1] * scale_factor + pic_size/2
             if show_node:
                 pic.draw_circle((center_x, center_y), node_radius, color=node_color)
-            if show_label:
+            if show_label and not show_eigenvector:
                 pic.draw_text(key, (center_x, center_y), label_size, color=label_color)
+            elif show_label and show_eigenvector:
+                eigenvector = self.get_eigenvector_of(key)
+                pic.draw_text(f'{key}\n{eigenvector}', (center_x, center_y), label_size, color=label_color)
+            elif not show_label and show_eigenvector:
+                eigenvector = self.get_eigenvector_of(key)
+                pic.draw_text(str(eigenvector), (center_x, center_y), label_size, color=label_color)
+                
+        if show_cartouche:
+            pic.draw_text(cartouche, (20, pic.height-label_size - 20), label_size, color=label_color, align = 'left')
 
         if invert_colors:
             pic.invert_colors()

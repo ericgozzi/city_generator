@@ -67,7 +67,12 @@ def build_the_city(library: str, questions: list[str]):
                   background_color = bck_colors.get(library, Color.BLACK),
                   label_size=30, 
                   edge_direction=False, 
-                  graph_type="KAMADA-KAWAI")
+                  graph_type="KAMADA-KAWAI",
+                  show_eigenvector = show_eignevector,
+                  show_label = show_labels,
+                  show_cartouche = show_concepts,
+                  cartouche = f"concepts:   {', '.join(questions)}"
+                  )
 
     return city
 
@@ -98,6 +103,10 @@ with settings_col.popover('Advanced Settings', use_container_width=True):
     additional_concepts = additional_concepts.lower()
     additional_concepts = additional_concepts.split(' ')
 
+    show_eignevector = st.checkbox('Show Eigenvector Value', False)
+    show_labels = st.checkbox('Show labels', True)
+    
+    show_concepts = st.checkbox('Show resume in picuture', True)
     resume = st.checkbox('Show resume')
 
 
@@ -105,22 +114,22 @@ with settings_col.popover('Advanced Settings', use_container_width=True):
 if generate_col.button('Generate City', use_container_width=True, type="primary"):
     questions = questions.lower()
     questions = questions.split(' ')
-    try:
-        with st.spinner("HAL is reading the books...", show_time=True):
-            image = build_the_city(library, questions)
-        st.image(image.np_array)
-        if resume:
-            st.text(f'Library: {library} \nConcepts: {', '.join(questions)} \nAdditional Concepts: {', '.join(additional_concepts)} \nDeepness: {deepness}')
-    
+    #try:
+    with st.spinner("HAL is reading the books...", show_time=True):
+        image = build_the_city(library, questions)
+    st.image(image.np_array)
+    if resume:
+        st.text(f'Library: {library} \nConcepts: {', '.join(questions)} \nAdditional Concepts: {', '.join(additional_concepts)} \nDeepness: {deepness}')
 
-        # Save to BytesIO buffer
-        buffer = io.BytesIO()
-        image.image.save(buffer, format="PNG")
-        buffer.seek(0)
 
-        download_col.download_button('Download Image', buffer, file_name=f'{library.upper()}_{'-'.join(questions)}.png', mime="image/png", use_container_width=True)
-            
+    # Save to BytesIO buffer
+    buffer = io.BytesIO()
+    image.image.save(buffer, format="PNG")
+    buffer.seek(0)
+
+    download_col.download_button('Download Image', buffer, file_name=f'{library.upper()}_{'-'.join(questions)}.png', mime="image/png", use_container_width=True)
+        
     
-    except:
-        st.error('This is embarassing... try to change the concepts.', icon="😳")
+    #except:
+    #    st.error('This is embarassing... try to change the concepts.', icon="😳")
 
